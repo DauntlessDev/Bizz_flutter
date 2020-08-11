@@ -148,7 +148,7 @@ class ItemPost extends ViewModelWidget<HomeViewModel> {
   @override
   Widget build(BuildContext context, HomeViewModel model) {
     return GestureDetector(
-      // onTap: model.navigateToProductView,
+      onTap: model.navigateToProductView,
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(17.0),

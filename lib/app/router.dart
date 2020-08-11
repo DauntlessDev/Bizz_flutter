@@ -2,6 +2,7 @@ import 'dart:html';
 
 import 'package:bizz_flutter/ui/views/auth/login/login_view.dart';
 import 'package:bizz_flutter/ui/views/auth/signup/signup_view.dart';
+import 'package:bizz_flutter/ui/views/product/product_view.dart';
 import 'package:bizz_flutter/ui/views/startup/cart/cart_view.dart';
 import 'package:bizz_flutter/ui/views/startup/home/home_view.dart';
 import 'package:bizz_flutter/ui/views/startup/profile/orders/orders_view.dart';
@@ -15,6 +16,7 @@ import 'package:auto_route/auto_route_annotations.dart';
   routes: <AutoRoute>[
     // initial route is named "/"
     MaterialRoute(page: StartupView, initial: true),
+    MaterialRoute(page: ProductView, name: 'productView'),
     MaterialRoute(page: CartView, name: 'cartView'),
     MaterialRoute(page: HomeView, name: 'homeView'),
     MaterialRoute(page: ProfileView, name: 'profileView'),

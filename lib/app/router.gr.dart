@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 
 import '../ui/views/auth/login/login_view.dart';
 import '../ui/views/auth/signup/signup_view.dart';
+import '../ui/views/product/product_view.dart';
 import '../ui/views/startup/cart/cart_view.dart';
 import '../ui/views/startup/home/home_view.dart';
 import '../ui/views/startup/profile/orders/orders_view.dart';
@@ -21,6 +22,7 @@ import '../ui/views/startup/startup_view.dart';
 
 class Routes {
   static const String startupView = '/';
+  static const String productView = '/product-view';
   static const String cartView = '/cart-view';
   static const String homeView = '/home-view';
   static const String profileView = '/profile-view';
@@ -31,6 +33,7 @@ class Routes {
   static const String searchView = '/search-view';
   static const all = <String>{
     startupView,
+    productView,
     cartView,
     homeView,
     profileView,
@@ -47,6 +50,7 @@ class Router extends RouterBase {
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
     RouteDef(Routes.startupView, page: StartupView),
+    RouteDef(Routes.productView, page: ProductView),
     RouteDef(Routes.cartView, page: CartView),
     RouteDef(Routes.homeView, page: HomeView),
     RouteDef(Routes.profileView, page: ProfileView),
@@ -62,6 +66,12 @@ class Router extends RouterBase {
     StartupView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => StartupView(),
+        settings: data,
+      );
+    },
+    ProductView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => ProductView(),
         settings: data,
       );
     },
