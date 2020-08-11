@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 import 'app/locator.dart';
 import 'app/router.gr.dart';
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'bizz_flutter',
       debugShowCheckedModeBanner: false,
       onGenerateRoute: Router().onGenerateRoute,
+      navigatorKey: locator<NavigationService>().navigatorKey,
     );
   }
 }
