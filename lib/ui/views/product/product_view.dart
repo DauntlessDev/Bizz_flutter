@@ -137,13 +137,14 @@ class _SellerInfoTile extends StatelessWidget {
       ),
       title: Text('Liz Victoria'),
       subtitle: Text('seller'),
-      trailing: FlatButton(
-        onPressed: () {},
-        child: Padding(
-          padding: const EdgeInsets.all(3.0),
+      trailing: Padding(
+        padding: const EdgeInsets.only(right: 8.0),
+        child: GestureDetector(
+          onTap: () {},
           child: Icon(
             MdiIcons.chat,
             color: Colors.blue,
+            size: 30,
           ),
         ),
       ),
