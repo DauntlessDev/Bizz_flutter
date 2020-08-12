@@ -148,19 +148,35 @@ class _CartItemPost extends ViewModelWidget<CartViewModel> {
                 ),
                 SizedBox(height: 15),
                 Card(
-                  color: Colors.grey,
-                  child: Row(
-                    children: [
-                      FlatButton(
-                        onPressed: () {},
-                        child: Icon(MdiIcons.minus),
-                      ),
-                      Text('3'),
-                      FlatButton(
-                        onPressed: () {},
-                        child: Icon(MdiIcons.plus),
-                      ),
-                    ],
+                  child: Container(
+                    height: 30,
+                    color: Colors.grey[200],
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ButtonTheme(
+                          minWidth: 15,
+                          height: 25,
+                          child: FlatButton(
+                            onPressed: () {},
+                            child: Icon(MdiIcons.minus, size: 15),
+                          ),
+                        ),
+                        Text('3'),
+                        ButtonTheme(
+                          minWidth: 15,
+                          height: 25,
+                          child: FlatButton(
+                            onPressed: () {},
+                            child: Icon(
+                              MdiIcons.plus,
+                              size: 15,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 )
               ],
