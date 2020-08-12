@@ -23,6 +23,8 @@ class _MainContent extends ViewModelWidget<ProfileViewModel> {
     Key key,
   }) : super(key: key);
 
+  final bool loggedIn = false;
+
   @override
   Widget build(BuildContext context, ProfileViewModel model) {
     return Scaffold(
@@ -38,95 +40,176 @@ class _MainContent extends ViewModelWidget<ProfileViewModel> {
         body: Stack(
           alignment: AlignmentDirectional.bottomCenter,
           children: [
-            Container(
-              child: Center(
-                child: Column(
-                  children: [
-                    SizedBox(height: 25),
-                    Avatar(radius: 90, photoUrl: ''),
-                    SizedBox(height: 25),
-                    Text(
-                      'Liz Victoria',
-                      style: TextStyle(
-                        color: Colors.blueGrey[700],
-                        fontSize: 19,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    SizedBox(height: 5),
-                    Material(
-                      color: whiteColor,
-                      borderRadius: BorderRadius.circular(30.0),
-                      elevation: 1.0,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20.0, vertical: 7.0),
-                        child: Text(
-                          'Seller',
-                          style: TextStyle(
-                            color: blackColor,
-                            fontSize: 10,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+            loggedIn ? _LoggedUserInfo() : _UnloggedUserInfo(),
+            _ProfileButtons(),
+          ],
+        ));
+  }
+}
+
+class _ProfileButtons extends StatelessWidget {
+  const _ProfileButtons({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 400,
+      child: Material(
+        elevation: 5,
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(15),
+          topRight: Radius.circular(15),
+        ),
+        color: whiteColor,
+        child: Padding(
+          padding: const EdgeInsets.all(25.0),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ListTile(
+                  leading: _ProfileImageIcon(
+                      imagePath: 'assets/images/credit_card_icon.PNG'),
+                  title: Text('Payment Settings'),
+                  trailing: Icon(MdiIcons.chevronRight),
                 ),
+                ListTile(
+                  leading: _ProfileImageIcon(
+                      imagePath: 'assets/images/products_icon.PNG'),
+                  title: Text('Products'),
+                  trailing: Icon(MdiIcons.chevronRight),
+                ),
+                ListTile(
+                  leading: _ProfileImageIcon(
+                      imagePath: 'assets/images/orders_icon.PNG'),
+                  title: Text('Orders'),
+                  trailing: Icon(MdiIcons.chevronRight),
+                ),
+                // ListTile(
+                //   leading: _ProfileImageIcon(
+                //       imagePath: 'assets/images/favourites_icon.PNG'),
+                //   title: Text('Favourites'),
+                //   trailing: Icon(MdiIcons.chevronRight),
+                // ),
+                ListTile(
+                  leading: _ProfileImageIcon(
+                      imagePath: 'assets/images/logout_icon.PNG'),
+                  title: Text('Logout'),
+                  trailing: Icon(MdiIcons.chevronRight),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _LoggedUserInfo extends StatelessWidget {
+  const _LoggedUserInfo({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Column(
+          children: [
+            SizedBox(height: 25),
+            Avatar(radius: 90, photoUrl: ''),
+            SizedBox(height: 25),
+            Text(
+              'Liz Victoria',
+              style: TextStyle(
+                color: Colors.blueGrey[700],
+                fontSize: 19,
+                fontWeight: FontWeight.w500,
               ),
             ),
-            Container(
-              height: 400,
-              child: Material(
-                elevation: 5,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15),
-                  topRight: Radius.circular(15),
-                ),
-                color: whiteColor,
-                child: Padding(
-                  padding: const EdgeInsets.all(25.0),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        ListTile(
-                          leading: _ProfileImageIcon(
-                              imagePath: 'assets/images/credit_card_icon.PNG'),
-                          title: Text('Payment Settings'),
-                          trailing: Icon(MdiIcons.chevronRight),
-                        ),
-                        ListTile(
-                          leading: _ProfileImageIcon(
-                              imagePath: 'assets/images/products_icon.PNG'),
-                          title: Text('Products'),
-                          trailing: Icon(MdiIcons.chevronRight),
-                        ),
-                        ListTile(
-                          leading: _ProfileImageIcon(
-                              imagePath: 'assets/images/orders_icon.PNG'),
-                          title: Text('Orders'),
-                          trailing: Icon(MdiIcons.chevronRight),
-                        ),
-                        // ListTile(
-                        //   leading: _ProfileImageIcon(
-                        //       imagePath: 'assets/images/favourites_icon.PNG'),
-                        //   title: Text('Favourites'),
-                        //   trailing: Icon(MdiIcons.chevronRight),
-                        // ),
-                        ListTile(
-                          leading: _ProfileImageIcon(
-                              imagePath: 'assets/images/logout_icon.PNG'),
-                          title: Text('Logout'),
-                          trailing: Icon(MdiIcons.chevronRight),
-                        ),
-                      ],
-                    ),
+            SizedBox(height: 5),
+            Material(
+              color: whiteColor,
+              borderRadius: BorderRadius.circular(30.0),
+              elevation: 1.0,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20.0, vertical: 7.0),
+                child: Text(
+                  'Seller',
+                  style: TextStyle(
+                    color: blackColor,
+                    fontSize: 10,
                   ),
                 ),
               ),
-            )
+            ),
           ],
-        ));
+        ),
+      ),
+    );
+  }
+}
+
+class _UnloggedUserInfo extends StatelessWidget {
+  const _UnloggedUserInfo({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Column(
+          children: [
+            SizedBox(height: 25),
+            Avatar(radius: 90, photoUrl: ''),
+            SizedBox(height: 30),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Material(
+                  color: Colors.blue[400],
+                  borderRadius: BorderRadius.circular(30.0),
+                  elevation: 1.0,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20.0, vertical: 7.0),
+                    child: Text(
+                      'Login',
+                      style: TextStyle(
+                        color: whiteColor,
+                        fontSize: 10,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 5),
+                Material(
+                  color: whiteColor,
+                  borderRadius: BorderRadius.circular(30.0),
+                  elevation: 1.0,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20.0, vertical: 7.0),
+                    child: Text(
+                      'Signup',
+                      style: TextStyle(
+                        color: blackColor,
+                        fontSize: 10,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 
