@@ -1,8 +1,7 @@
 //view class
-import 'package:bizz_flutter/ui/widgets/avatar.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_counter/flutter_counter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:stacked/stacked.dart';
 import '../../../../utils/constants.dart';
@@ -22,7 +21,7 @@ class CartView extends StatelessWidget {
 class _MainContent extends ViewModelWidget<CartViewModel> {
   const _MainContent({
     Key key,
-  }) : super(key: key);
+  }) : super(key: key, reactive: true);
 
   @override
   Widget build(BuildContext context, CartViewModel model) {
@@ -63,32 +62,32 @@ class _MainContent extends ViewModelWidget<CartViewModel> {
           Expanded(
             child: ListView(
               children: <Widget>[
-                CartItemPost(
+                _CartItemPost(
                   title: 'Green Light Weight Dress',
                   prize: 47,
                   pictureUrl: 'assets/images/green dress.jpg',
                 ),
-                CartItemPost(
+                _CartItemPost(
                   title: 'Pink Light Weight Dress',
                   prize: 47,
                   pictureUrl: 'assets/images/pink dress.jpg',
                 ),
-                CartItemPost(
+                _CartItemPost(
                   title: 'Water Light Weight Shirt',
                   prize: 47,
                   pictureUrl: 'assets/images/brownish sweater.jpg',
                 ),
-                CartItemPost(
+                _CartItemPost(
                   title: 'Brownish Light Weight Sweater',
                   prize: 47,
                   pictureUrl: 'assets/images/green dress.jpg',
                 ),
-                CartItemPost(
+                _CartItemPost(
                   title: 'Pink Light Weight Dress',
                   prize: 47,
                   pictureUrl: 'assets/images/pink dress.jpg',
                 ),
-                CartItemPost(
+                _CartItemPost(
                   title: 'Water Light Weight Shirt',
                   prize: 47,
                   pictureUrl: 'assets/images/brownish sweater.jpg',
@@ -102,8 +101,8 @@ class _MainContent extends ViewModelWidget<CartViewModel> {
   }
 }
 
-class CartItemPost extends ViewModelWidget<CartViewModel> {
-  const CartItemPost({
+class _CartItemPost extends ViewModelWidget<CartViewModel> {
+  const _CartItemPost({
     Key key,
     @required this.title,
     @required this.pictureUrl,
@@ -148,15 +147,22 @@ class CartItemPost extends ViewModelWidget<CartViewModel> {
                       fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 15),
-                Counter(
-                  initialValue: model.getCounterValue,
-                  minValue: 0,
-                  maxValue: 15,
-                  step: 1,
-                  decimalPlaces: 0,
-                  buttonSize: 25,
-                  onChanged: (value) => model.setCounterValue,
-                ),
+                Card(
+                  color: Colors.grey,
+                  child: Row(
+                    children: [
+                      FlatButton(
+                        onPressed: () {},
+                        child: Icon(MdiIcons.minus),
+                      ),
+                      Text('3'),
+                      FlatButton(
+                        onPressed: () {},
+                        child: Icon(MdiIcons.plus),
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
           ],

@@ -2,7 +2,6 @@
 import 'package:bizz_flutter/ui/widgets/avatar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_counter/flutter_counter.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:stacked/stacked.dart';
 import '../../../../../utils/constants.dart';
@@ -148,15 +147,6 @@ class ProductsItemPost extends ViewModelWidget<ProductsViewModel> {
                       fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 15),
-                Counter(
-                  initialValue: model.getCounterValue,
-                  minValue: 0,
-                  maxValue: 15,
-                  step: 1,
-                  decimalPlaces: 0,
-                  buttonSize: 25,
-                  onChanged: (value) => model.setCounterValue,
-                ),
               ],
             ),
           ],

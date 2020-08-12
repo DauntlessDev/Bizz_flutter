@@ -1,147 +1,269 @@
 //view class
 import 'package:bizz_flutter/ui/views/product/product_viewmodel.dart';
 import 'package:bizz_flutter/utils/constants.dart';
-import 'package:bizz_flutter/ui/widgets/avatar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:stacked/stacked.dart';
 
 class ProductView extends StatelessWidget {
-  static final navigatorKey = GlobalKey<NavigatorState>();
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ProductViewModel>.reactive(
-      builder: (context, model, child) => _MainContent(),
+      builder: (context, model, child) => _ProductMainContent(),
       viewModelBuilder: () => ProductViewModel(),
     );
   }
 }
 
-class _MainContent extends ViewModelWidget<ProductViewModel> {
-  const _MainContent({
+class _ProductMainContent extends ViewModelWidget<ProductViewModel> {
+  const _ProductMainContent({
     Key key,
-  }) : super(key: key);
+  }) : super(key: key, reactive: true);
 
   @override
   Widget build(BuildContext context, ProductViewModel model) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         elevation: 0,
-        backgroundColor: Colors.grey[100],
-        title: Avatar(
-          radius: 20,
-          photoUrl: '',
-        ),
-        actions: <Widget>[
-          Icon(
-            MdiIcons.cartOutline,
-            color: blackColor,
-          ),
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _ProductPictureStack(),
+          _SellerInfoTile(),
+          Divider(height: 1, color: Colors.grey),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0),
-            child: Icon(
-              MdiIcons.messageOutline,
-              color: blackColor,
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Text(
+              'Reviews',
+              style: TextStyle(color: Colors.grey[700]),
             ),
           ),
-        ],
-        bottom: PreferredSize(
-          preferredSize: Size.square(70),
-          child: Column(
-            children: [
-              SizedBox(height: 10),
-              Card(
-                margin: const EdgeInsets.symmetric(horizontal: 30.0),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Product anything...',
-                      // suffixIcon: Icon(Icons.Product),
-                    ),
-                  ),
-                ),
+          Expanded(
+            child: Container(
+              child: ListView(
+                padding: EdgeInsets.all(0),
+                children: [
+                  _ReviewTile(),
+                  _ReviewTile(),
+                  _ReviewTile(),
+                  _ReviewTile(),
+                  _ReviewTile(),
+                ],
               ),
-              SizedBox(height: 15),
-            ],
+            ),
           ),
-        ),
-      ),
-      body: ListView(
-        children: <Widget>[
-          ProductItemPost(
-            title: 'Green Light Weight Dress',
-            prize: 47,
-            pictureUrl: 'assets/images/green dress.jpg',
-          ),
-          ProductItemPost(
-            title: 'Pink Light Weight Dress',
-            prize: 47,
-            pictureUrl: 'assets/images/pink dress.jpg',
-          ),
-          ProductItemPost(
-            title: 'Water Light Weight Shirt',
-            prize: 47,
-            pictureUrl: 'assets/images/brownish sweater.jpg',
-          ),
-          ProductItemPost(
-            title: 'Brownish Light Weight Sweater',
-            prize: 47,
-            pictureUrl: 'assets/images/green dress.jpg',
-          ),
-          ProductItemPost(
-            title: 'Pink Light Weight Dress',
-            prize: 47,
-            pictureUrl: 'assets/images/pink dress.jpg',
-          ),
-          ProductItemPost(
-            title: 'Water Light Weight Shirt',
-            prize: 47,
-            pictureUrl: 'assets/images/brownish sweater.jpg',
-          ),
+          _ProductBottomButtons(),
         ],
       ),
     );
   }
 }
 
-class ProductItemPost extends StatelessWidget {
-  const ProductItemPost({
+class _ReviewTile extends StatelessWidget {
+  const _ReviewTile({
     Key key,
-    @required this.title,
-    @required this.pictureUrl,
-    @required this.prize,
   }) : super(key: key);
-
-  final String title;
-  final String pictureUrl;
-  final int prize;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 0),
-      child: Card(
-        child: Column(
+    return Row(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Card(
+            child: Image(
+              image: AssetImage('assets/images/green dress.jpg'),
+              height: 70,
+              width: 70,
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        SizedBox(width: 15),
+        Column(
           children: [
-            Image(image: AssetImage(pictureUrl)),
+            Text(
+              'I have been buying things from  \nshopee for couple of years now. \n What I like about them is...',
+              maxLines: 2,
+              style: TextStyle(fontWeight: FontWeight.w500),
+            ),
             SizedBox(height: 10),
-            Text(
-              '\$ ${prize.toStringAsFixed(2)}',
-              style: TextStyle(
-                  color: blackColor, fontSize: 16, fontWeight: FontWeight.bold),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 10.0),
+                  child: Row(
+                    children: [
+                      SmoothStarRating(
+                          allowHalfRating: true,
+                          onRated: (v) {},
+                          starCount: 5,
+                          rating: 5,
+                          size: 15.0,
+                          isReadOnly: true,
+                          color: Colors.yellow,
+                          borderColor: Colors.yellow,
+                          spacing: 0.0),
+                      Text(' • Zeah Angela')
+                    ],
+                  ),
+                ),
+              ],
             ),
-            Text(
-              title,
-              style: TextStyle(
-                  color: blackColor, fontSize: 15, fontWeight: FontWeight.w400),
-            ),
-            SizedBox(height: 20),
           ],
         ),
+      ],
+    );
+  }
+}
+
+class _SellerInfoTile extends StatelessWidget {
+  const _SellerInfoTile({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Card(
+        child: Image(
+          image: AssetImage('assets/images/profile_picture.jpg'),
+        ),
       ),
+      title: Text('Liz Victoria'),
+      subtitle: Text('seller'),
+      trailing: FlatButton(
+        onPressed: () {},
+        child: Padding(
+          padding: const EdgeInsets.all(3.0),
+          child: Icon(
+            MdiIcons.chat,
+            color: Colors.blue,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ProductBottomButtons extends StatelessWidget {
+  const _ProductBottomButtons({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Container(
+          color: Colors.blue[400],
+          child: FlatButton(
+            onPressed: () {},
+            child: Padding(
+              padding: const EdgeInsets.all(3.0),
+              child: Icon(
+                MdiIcons.cartPlus,
+                color: whiteColor,
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          child: Container(
+            color: Colors.blue[800],
+            child: FlatButton(
+              onPressed: () {},
+              child: Padding(
+                padding: const EdgeInsets.all(3.0),
+                child: Text(
+                  'Buy Now',
+                  style: whiteTextStyle,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _ProductPictureStack extends StatelessWidget {
+  const _ProductPictureStack({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: <Widget>[
+        Image(
+          image: AssetImage('assets/images/brownish sweater.jpg'),
+          height: 400,
+          fit: BoxFit.fitHeight,
+        ),
+        Positioned(
+          left: 10,
+          bottom: 80,
+          child: Text(
+            'Brown Sweater',
+            style: whiteTextStyle.copyWith(fontSize: 14),
+          ),
+        ),
+        Positioned(
+          left: 10,
+          bottom: 50,
+          child: Text(
+            '₱215',
+            style: whiteTextStyle.copyWith(
+                fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+        ),
+        Positioned(
+          left: 10,
+          bottom: 20,
+          child: SmoothStarRating(
+              allowHalfRating: true,
+              onRated: (v) {},
+              starCount: 5,
+              rating: 4,
+              size: 20.0,
+              isReadOnly: true,
+              color: Colors.yellow,
+              borderColor: Colors.yellow,
+              spacing: 0.0),
+        ),
+        Positioned(
+          right: 25,
+          bottom: 20,
+          child: Column(
+            children: [
+              Text(
+                '37 Sold',
+                style: whiteTextStyle.copyWith(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              SizedBox(height: 5),
+              Text(
+                '14 Stock',
+                style: whiteTextStyle.copyWith(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
