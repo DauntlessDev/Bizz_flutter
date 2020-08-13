@@ -40,12 +40,22 @@ class _MainContent extends ViewModelWidget<SignupViewModel> {
         padding: const EdgeInsets.all(40.0),
         child: Column(
           children: <Widget>[
-            Spacer(flex: 10),
-            const Align(
-              alignment: Alignment.centerLeft,
+            const Spacer(flex: 4),
+            Align(
+              alignment: Alignment.center,
               child: Text(
-                'Create Account \nfor Bizz!',
-                style: welcomeStyle,
+                'SIGN UP',
+                style: blackTextStyle.copyWith(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 2),
+              ),
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: Text(
+                'For Bizz Shop',
+                style: blackTextStyle.copyWith(fontSize: 14),
               ),
             ),
             const Spacer(flex: 1),
@@ -59,10 +69,10 @@ class _MainContent extends ViewModelWidget<SignupViewModel> {
             const SizedBox(height: 10),
             TappableRichText(
               firstString: 'Already have an account?',
-              secondString: 'Login.',
+              secondString: ' Login.',
               onTap: model.navigateToLogin,
             ),
-            const Spacer(flex: 4),
+            const Spacer(flex: 5),
           ],
         ),
       ),

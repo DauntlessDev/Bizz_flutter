@@ -1,4 +1,6 @@
 //view class
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:bizz_flutter/ui/widgets/rounded_button.dart';
@@ -38,7 +40,25 @@ class _MainContent extends ViewModelWidget<LoginViewModel> {
         padding: const EdgeInsets.all(40.0),
         child: Column(
           children: [
-            const Spacer(flex: 10),
+            const Spacer(flex: 4),
+            Align(
+              alignment: Alignment.center,
+              child: Text(
+                'LOGIN',
+                style: blackTextStyle.copyWith(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 2),
+              ),
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: Text(
+                'For Bizz Shop',
+                style: blackTextStyle.copyWith(fontSize: 14),
+              ),
+            ),
+            const Spacer(flex: 1),
             _LoginForm(passwordFocusNode: _passwordFocusNode),
             const SizedBox(height: 20),
             RoundedButton(
@@ -57,7 +77,7 @@ class _MainContent extends ViewModelWidget<LoginViewModel> {
               secondString: 'Create one.',
               onTap: model.navigateToSignup,
             ),
-            const Spacer(flex: 3),
+            const Spacer(flex: 5),
           ],
         ),
       ),
