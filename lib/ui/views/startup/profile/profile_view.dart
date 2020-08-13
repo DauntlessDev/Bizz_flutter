@@ -47,13 +47,13 @@ class _MainContent extends ViewModelWidget<ProfileViewModel> {
   }
 }
 
-class _ProfileButtons extends StatelessWidget {
+class _ProfileButtons extends ViewModelWidget<ProfileViewModel> {
   const _ProfileButtons({
     Key key,
-  }) : super(key: key);
+  }) : super(key: key, reactive: true);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ProfileViewModel model) {
     return Container(
       height: 400,
       child: Material(
@@ -76,12 +76,14 @@ class _ProfileButtons extends StatelessWidget {
                   trailing: Icon(MdiIcons.chevronRight),
                 ),
                 ListTile(
+                  onTap: model.navigateToProductsView,
                   leading: _ProfileImageIcon(
                       imagePath: 'assets/images/products_icon.PNG'),
                   title: Text('Products'),
                   trailing: Icon(MdiIcons.chevronRight),
                 ),
                 ListTile(
+                  onTap: model.navigateToOrdersView,
                   leading: _ProfileImageIcon(
                       imagePath: 'assets/images/orders_icon.PNG'),
                   title: Text('Orders'),
@@ -154,13 +156,13 @@ class _LoggedUserInfo extends StatelessWidget {
   }
 }
 
-class _UnloggedUserInfo extends StatelessWidget {
+class _UnloggedUserInfo extends ViewModelWidget<ProfileViewModel> {
   const _UnloggedUserInfo({
     Key key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ProfileViewModel model) {
     return Container(
       child: Center(
         child: Column(
@@ -171,35 +173,41 @@ class _UnloggedUserInfo extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Material(
-                  color: Colors.blue[400],
-                  borderRadius: BorderRadius.circular(30.0),
-                  elevation: 1.0,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20.0, vertical: 7.0),
-                    child: Text(
-                      'Login',
-                      style: TextStyle(
-                        color: whiteColor,
-                        fontSize: 10,
+                FlatButton(
+                  onPressed: model.navigateToLoginView,
+                  child: Material(
+                    color: Colors.blue[400],
+                    borderRadius: BorderRadius.circular(30.0),
+                    elevation: 1.0,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20.0, vertical: 7.0),
+                      child: Text(
+                        'Login',
+                        style: TextStyle(
+                          color: whiteColor,
+                          fontSize: 10,
+                        ),
                       ),
                     ),
                   ),
                 ),
                 SizedBox(width: 5),
-                Material(
-                  color: whiteColor,
-                  borderRadius: BorderRadius.circular(30.0),
-                  elevation: 1.0,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20.0, vertical: 7.0),
-                    child: Text(
-                      'Signup',
-                      style: TextStyle(
-                        color: blackColor,
-                        fontSize: 10,
+                FlatButton(
+                  onPressed: model.navigateToSignupView,
+                  child: Material(
+                    color: whiteColor,
+                    borderRadius: BorderRadius.circular(30.0),
+                    elevation: 1.0,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20.0, vertical: 7.0),
+                      child: Text(
+                        'Signup',
+                        style: TextStyle(
+                          color: blackColor,
+                          fontSize: 10,
+                        ),
                       ),
                     ),
                   ),
