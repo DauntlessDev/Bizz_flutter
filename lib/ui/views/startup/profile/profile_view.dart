@@ -192,26 +192,6 @@ class _UnloggedUserInfo extends ViewModelWidget<ProfileViewModel> {
                     ),
                   ),
                 ),
-                SizedBox(width: 5),
-                FlatButton(
-                  onPressed: model.navigateToSignupView,
-                  child: Material(
-                    color: whiteColor,
-                    borderRadius: BorderRadius.circular(30.0),
-                    elevation: 1.0,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 7.0),
-                      child: Text(
-                        'Signup',
-                        style: TextStyle(
-                          color: blackColor,
-                          fontSize: 10,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
               ],
             ),
           ],

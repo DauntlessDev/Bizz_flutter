@@ -44,7 +44,7 @@ class _MainContent extends ViewModelWidget<SignupViewModel> {
             const Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Sign up to \nbizz_flutter!',
+                'Create Account \nfor Bizz!',
                 style: welcomeStyle,
               ),
             ),
