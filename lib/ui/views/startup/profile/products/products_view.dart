@@ -28,8 +28,11 @@ class _MainContent extends ViewModelWidget<ProductsViewModel> {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.black, //change your color here
+        ),
         backgroundColor: whiteColor,
-        title: Text('Shopping Products', style: blackTextStyle),
+        title: Text('My Products', style: blackTextStyle),
         actions: <Widget>[
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0),
@@ -39,6 +42,14 @@ class _MainContent extends ViewModelWidget<ProductsViewModel> {
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        heroTag: 'my-products-add',
+        child: Icon(
+          MdiIcons.viewGridPlusOutline,
+          color: whiteColor,
+        ),
+        onPressed: () {},
       ),
       body: Column(
         children: <Widget>[
@@ -147,6 +158,13 @@ class ProductsItemPost extends ViewModelWidget<ProductsViewModel> {
                       fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 15),
+                Text(
+                  'Stocks: 23',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 14,
+                  ),
+                ),
               ],
             ),
           ],

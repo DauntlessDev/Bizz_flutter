@@ -28,8 +28,11 @@ class _MainContent extends ViewModelWidget<OrdersViewModel> {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.black, //change your color here
+        ),
         backgroundColor: whiteColor,
-        title: Text('Shopping Orders', style: blackTextStyle),
+        title: Text('My Orders', style: blackTextStyle),
         actions: <Widget>[
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0),
@@ -47,13 +50,16 @@ class _MainContent extends ViewModelWidget<OrdersViewModel> {
             child: Card(
               child: Row(
                 children: <Widget>[
-                  Checkbox(onChanged: (bool value) {}, value: false),
-                  Text(
-                    '  Select All ',
-                    style: TextStyle(fontWeight: FontWeight.w500),
+                  // Checkbox(onChanged: (bool value) {}, value: false),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      '  Order List ',
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
                   ),
                   Spacer(),
-                  Icon(MdiIcons.trashCanOutline),
+                  // Icon(MdiIcons.trashCanOutline),
                   SizedBox(width: 10),
                 ],
               ),
@@ -120,7 +126,7 @@ class OrdersItemPost extends ViewModelWidget<OrdersViewModel> {
       child: Card(
         child: Row(
           children: <Widget>[
-            Checkbox(onChanged: (bool value) {}, value: false),
+            // Checkbox(onChanged: (bool value) {}, value: false),
             Image(
               image: AssetImage(pictureUrl),
               height: 150,
@@ -147,7 +153,22 @@ class OrdersItemPost extends ViewModelWidget<OrdersViewModel> {
                       fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 15),
+                Text(
+                  'Quantity: 23',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 14,
+                  ),
+                ),
               ],
+            ),
+            Spacer(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30.0),
+              child: Icon(
+                MdiIcons.truckDelivery,
+                color: blackColor,
+              ),
             ),
           ],
         ),
